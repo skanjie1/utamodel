@@ -96,8 +96,7 @@ def solver(criterion_data, preferences_ranking, criteria_bounds, alpha, delta=0.
     # Step 5: Solve
     status = solver.Solve()
     
-    if status not in [pywraplp.Solver.OPTIMAL, 
-                      pywraplp.Solver.FEASIBLE]:
+    if status not in [pywraplp.Solver.OPTIMAL, pywraplp.Solver.FEASIBLE]:
         raise RuntimeError(f"Solver failed: {status}")
     
     # Extract solution
@@ -213,7 +212,7 @@ def print_results(utilities, errors, grids, criteria_data, preference_ranking):
     # Predicted utilities
     print("\nPredicted Utilities:")
     U_values = [(a, evaluate_action(criteria_data[a], utilities, grids)) 
-                for a in preference_ranking]
+    for a in preference_ranking]
     for action, u_val in sorted(U_values, key=lambda x: x[1], reverse=True):
         rank = preference_ranking.index(action) + 1
         print(f"  {action}: U = {u_val:.4f} (original rank: {rank})")
